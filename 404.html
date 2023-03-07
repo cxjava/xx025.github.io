@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>GITHUB@{{owner}}</title>
+    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-d/vue/3.2.31/vue.global.js"
+            type="application/javascript"></script>
+    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-d/jquery/3.6.0/jquery.js"
+            type="application/javascript"></script>
+</head>
+<style>
+
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 28px;
+        line-height: 1.5;
+        background-color: #fff;
+        color: #000;
+    }
+
+    .container {
+        margin-left: auto; /* 设置左边距为自动，这将使盒子水平居中 */
+        margin-right: auto; /* 设置右边距为自动，这将使盒子水平居中 */
+        padding: 20px; /* 添加一些内边距，使内容不会靠得太紧 */
+    }
+
+    @media screen and (min-aspect-ratio: 1/1) {
+        .container {
+            width: 600px; /* 设置盒子的宽度为600像素 */
+            padding: 20px; /* 添加一些内边距，使内容不会靠得太紧 */
+        }
+
+        body {
+            font-size: 20px;
+        }
+    }
+
+
+    a {
+        text-decoration: underline;
+        color: #007bff;
+        transition: color 0.2s ease-in-out;
+        display: inline-block;
+        /*text-transform: uppercase;*/
+    }
+
+    span {
+        margin-top: 5px;
+        /*font-size: 14px;*/
+        color: #666;
+        display: block;
+        text-decoration: none;
+    }
+
+    .error-info {
+        color: darkred;
+        border: 1px solid black;
+        padding: 10px;
+        font-family: 'Courier New', Courier, monospace;
+
+        overflow: auto;
+    }
+</style>
+
+<body>
+
+<div id="app" class="container">
+
+    <h1>
+        <a>GitHub@{{ owner }}</a></h1>
+
+
+    <p>这是我的个人主页，它工作在GitHub API之上，主要做一些连接跳转工作</p>
+    <ul v-if=" files.length >0 ">
+        <li v-for="file in files" :key="file.name">
+            <a :href=fileUrl(file.path)>{{ fileUrl(file.path) }}</a>
+            <span>{{ file.info2 ? file.info2 : 'A great website' }}</span>
+        </li>
+    </ul>
+    <div v-else class="error-info">
+    </div>
+</div>
+
+</body>
+
+
+<script>
+
+
+    const repo = location.host; // GitHub仓库名称
+    const owner = repo.split('.')[0]; // GitHub仓库所有者名称
+
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents?ref=main`
+
+    // 构造GitHub API URL
+    const app = Vue.createApp({
+        data() {
+            return {
+                owner: owner,
+                repo: repo,
+                files: [],
+            }
+        },
+        async mounted() {
+            try {
+                const response = await axios.get(url);
+
+
+                const files = response.data.filter(file => file.type.includes('dir') && !file.path.startsWith('.'));
+                for (const file of files) {
+                    try {
+                        const response = await axios.get(file.url);
+                        const datum = response.data.find(data => data.name.startsWith('info.'));
+                        if (datum) {
+                            file.info2 = datum.name.split('info.')[1];
+                        }
+                    } catch (error) {
+                    }
+                }
+                this.files = files;
+            } catch (error) {
+
+                let bb = error.response.data
+                $(".error-info").text(JSON.stringify(bb, null, '   '));
+            }
+        },
+        computed: {
+            fileUrl: function () {
+                return (path) => {
+                    return 'https://' + this.repo + '/' + path
+                }
+            }
+        }
+
+    })
+    $('title').text(`GITHUB@${owner}`)
+
+    app.mount('#app')
+</script>
+</html>
