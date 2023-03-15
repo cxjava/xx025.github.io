@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引导页</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/vue@3.0.9/dist/vue.global.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+
+<body>
+<div id="app" class="container">
+    <div class="header">
+        <a href="https://github.com/xx025/chatgptapi_server" class="project-link">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
+                 width="24px" height="24px" style="vertical-align: middle;">
+            <span class="project-name">我的项目</span>
+        </a>
+    </div>
+    <div class="content">
+        <p class="title">最新免费 ChatGPT 聊天平台</p>
+
+        <div v-for="(item, index) in data" :key="index" class="button-wrapper">
+            <button class="button" @click="goToSite(item.siteurl)">{{ item.sitename }}</button>
+        </div>
+
+    </div>
+</div>
+</body>
+
+
+<script>
+
+    const app = Vue.createApp({
+
+        data() {
+            return {
+                data: [
+                    {sitename: '收集了众多免费镜像站', siteurl: '/carrot'},
+                ]
+            }
+        },
+        methods: {
+            goToSite(url) {
+                window.location.href = url;
+            }
+        }
+    })
+
+
+    app.mount('#app')
+
+
+</script>
+
+
+</html>

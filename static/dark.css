@@ -1,0 +1,63 @@
+/* 一个暗色主题，由chatgpt提供
+修改了<a> 为绿色
+*/
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+    }
+
+    a {
+        color: #5fbd61
+    }
+
+    h1, h2, h3, h4, h5, h6, strong {
+        color: #f0f0f0;
+    }
+
+    hr {
+        border-color: #4e4e4e;
+    }
+
+    code {
+        background-color: #4e4e4e;
+        color: #f0f0f0;
+    }
+
+    blockquote {
+        border-left: 4px solid #4e4e4e;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #4e4e4e;
+    }
+
+    th {
+        background-color: #4e4e4e;
+        color: #f0f0f0;
+    }
+
+    td {
+        background-color: #2e2e2e;
+        color: #f0f0f0;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: #1e1e1e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #4e4e4e;
+        border-radius: 10px;
+    }
+
+}

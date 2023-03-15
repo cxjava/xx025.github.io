@@ -1,0 +1,17 @@
+<script>
+
+    let countdown = 5;
+    let countdownTimer = setInterval(function () {
+        countdown--;
+        if (countdown >= 0) {
+            document.getElementById("is404page").innerHTML = countdown;
+        }
+        if (countdown === 0) {
+            window.location.href = "/";
+        }
+    }, 1000);
+    document.getElementById("pauseBtn").addEventListener("click", function (event) {
+        clearInterval(countdownTimer);
+        event.preventDefault();
+    });
+</script>
