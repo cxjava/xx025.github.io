@@ -8,11 +8,6 @@ title: 赞赏
 </center>
 
 
-
-{% include my-projects.md %}
-
-
-
 ### 赞赏名单
 
 > 不完全统计
