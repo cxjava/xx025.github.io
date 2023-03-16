@@ -7,6 +7,9 @@ title: 赞赏
 <img src="/static/wxzs/wxds.png" style="height: 400px" alt="zs">
 </div>
 
+
+> 生活不易，感谢您的赞赏
+
 ### 赞赏名单
 
 > 不完全统计,感谢！
