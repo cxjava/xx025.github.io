@@ -4,7 +4,7 @@ title: 赞赏
 ---
 
 <div style="text-align: center;">
-<img src="/static/wxzs/wxds.png" style="height: 400px" alt="zs">
+<img src="http://xx025.github.io/static/wxzs/wxds.png" style="height: 400px" alt="zs">
 </div>
 
 
